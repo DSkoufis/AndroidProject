@@ -1,2 +1,2 @@
 # AndroidProject
-Project for Android Dev class in UoM
+Project for Android Development class in UoM
