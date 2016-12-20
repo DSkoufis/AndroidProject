@@ -4,5 +4,18 @@
     <string name="activity_destination">Select your destination</string>
 
     <string name="title_activity_search_flights">SearchFlightsActivity</string>
+    <string name="origin_button">Select your location</string>
+    <string name="destination_button">Select your destination</string>
+    <string name="your_location">Your location:</string>
+    <string name="your_destination">Your destination:</string>
+    <string name="your_seat">Select seat type:</string>
+
+
+    <string-array name="seats_array">
+        <item>Economy</item>
+        <item>Premium economy</item>
+        <item>Business class</item>
+        <item>First class</item>
+    </string-array>
 
 </resources>
