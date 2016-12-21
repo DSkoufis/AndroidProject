@@ -3,6 +3,9 @@
     <color name="colorPrimary">#0D47A1</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="color_background">#0D47A1</color>
+    <color name="button_yellow">#FFB300</color>
+    <color name="button_blue">#009688</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

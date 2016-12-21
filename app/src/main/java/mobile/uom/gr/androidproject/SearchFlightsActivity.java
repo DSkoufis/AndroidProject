@@ -11,7 +11,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_flights);
-
+        this.setTitle("Select your criteria");
         Spinner spinner = (Spinner) findViewById(R.id.seats_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -20,5 +20,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+
     }
 }

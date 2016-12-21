@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#0D47A1"
+    android:background="@color/color_background"
     tools:context="mobile.uom.gr.androidproject.SearchFlightsActivity">
 
     <Button
@@ -20,7 +20,7 @@
         android:text="@string/origin_button"
         android:textAllCaps="false"
         android:textSize="20sp"
-        android:background="#009688"
+        android:background="@color/button_blue"
         />
 
     <LinearLayout
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="218dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:id="@+id/origin_text"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:text="@string/destination_button"
         android:textAllCaps="false"
-        android:background="#009688"
+        android:background="@color/button_blue"
         android:textSize="20sp"
         />
 
@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="218dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:id="@+id/destination_text"
@@ -85,25 +85,150 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Passengers"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"
+            android:background="@color/button_blue"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adults:"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:id="@+id/adults_text"
+                android:textAlignment="center"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Children:"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:id="@+id/children_text"
+                android:textAlignment="center"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infants:"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:id="@+id/infants_text"
+                android:textAlignment="center"
+                android:layout_gravity="end"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        >
 
         <TextView
-            android:text="@string/your_seat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_gravity="start"
-            android:layout_marginBottom="5dp"
-            />
-        <Spinner
-            android:id="@+id/seats_spinner"
+            >
+
+            <TextView
+                android:text="@string/your_seat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_gravity="start"
+                android:layout_marginBottom="5dp"
+                />
+            <Spinner
+                android:id="@+id/seats_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <CheckBox
+            android:text="Direct flights only"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/direct_flights"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
             />
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Search for flights"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:background="@color/button_yellow"
+        android:layout_marginTop="10dp"/>
 
 
 

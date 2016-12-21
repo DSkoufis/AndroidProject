@@ -11,7 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="mobile.uom.gr.androidproject.MainActivity"
-    android:background="#0D47A1"
+    android:background="@color/color_background"
     android:weightSum="1">
 
     <ImageView
@@ -29,7 +29,7 @@
         android:layout_height="96dp"
         android:layout_marginBottom="19dp"
         android:id="@+id/button"
-        android:background="#FFB300"
+        android:background="@color/button_yellow"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
