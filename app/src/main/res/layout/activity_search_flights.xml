@@ -100,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Passengers"
+                android:id="@+id/select_passengers_button"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
@@ -234,9 +235,6 @@
             android:textAllCaps="false"
             android:background="@color/button_yellow"
             android:layout_marginTop="10dp"/>
-
-
-
 
     </LinearLayout>
 </ScrollView>

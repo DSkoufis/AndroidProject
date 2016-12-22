@@ -18,7 +18,7 @@
         <activity android:name=".OriginActivity" />
         <activity android:name=".DestinationActivity" />
         <activity android:name=".FlightsActivity" />
-        <activity android:name=".SearchFlightsActivity"></activity>
+        <activity android:name=".SearchFlightsActivity" />
     </application>
 
 </manifest>
