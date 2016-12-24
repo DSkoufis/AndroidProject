@@ -15,16 +15,6 @@
         />
 
 
-    <Button
-        android:text="@string/ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/set_passengers_button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/button_yellow"/>
-
-
     <NumberPicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +22,7 @@
         android:layout_below="@+id/children_textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp"
-
+        android:solidColor="@color/button_blue"
         />
 
     <TextView
@@ -63,7 +53,7 @@
         android:layout_alignEnd="@+id/infants_textView"
         android:layout_below="@id/infants_textView"
         android:layout_marginTop="7dp"
-
+        android:solidColor="@color/button_blue"
         />
 
     <NumberPicker
@@ -73,10 +63,29 @@
         android:layout_below="@id/adults_textView"
         android:layout_alignStart="@+id/adults_textView"
         android:layout_marginTop="7dp"
-
+        android:solidColor="@color/button_blue"
         />
 
-    <!-- TODO: add a cancel button near the OK button -->
+    <Button
+        android:text="@string/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/set_passengers_button"
+        android:background="@color/button_yellow"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/number_picker_adults"
+        android:onClick="setBtn"/>
+
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/button_yellow"
+        android:layout_alignEnd="@+id/number_picker_infants"
+        android:id="@+id/cancel_passenger_selection"
+        android:onClick="cancelBtn"
+        />
 
 
 </RelativeLayout>

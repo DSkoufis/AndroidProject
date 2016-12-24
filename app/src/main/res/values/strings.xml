@@ -11,6 +11,7 @@
     <string name="your_seat">Select seat type:</string>
 
     <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="infants">Infants</string>
     <string name="children">Children</string>
     <string name="adults">Adults</string>

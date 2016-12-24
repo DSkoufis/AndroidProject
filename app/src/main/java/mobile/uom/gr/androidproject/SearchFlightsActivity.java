@@ -18,9 +18,9 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
     private static TextView location_tv; //textView that shows the city that user selected in OriginActivity.java
     private static TextView destination_tv; //textView that shows the city that user selected in DestinationActivity.java
-    private static TextView adults_tv; //textView that shows the number of adults that the user selected in PassengerSelectonActivity
-    private static TextView children_tv; //textView that shows the number of children that the user selected in PassengerSelectonActivity
-    private static TextView infants_tv; //textView that shows the number of infants that the user selected in PassengerSelectonActivity
+    private static TextView adults_tv; //textView that shows the number of adults that the user selected in PassengerSelectionActivity
+    private static TextView children_tv; //textView that shows the number of children that the user selected in PassengerSelectionActivity
+    private static TextView infants_tv; //textView that shows the number of infants that the user selected in PassengerSelectionActivity
 
 
     @Override
@@ -49,8 +49,6 @@ public class SearchFlightsActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-
-
         location_tv = (TextView) findViewById(R.id.origin_text);
         destination_tv = (TextView) findViewById(R.id.destination_text);
         adults_tv = (TextView) findViewById(R.id.adults_text);
@@ -61,24 +59,45 @@ public class SearchFlightsActivity extends AppCompatActivity {
     }
 
     public void setLocation(View view) {
+        //this when 'Select your origin' btn is pressed
         Intent intent = new Intent(this, OriginActivity.class);
         startActivity(intent);
     }
 
     public void setDestination(View view) {
+        //this when 'Select your destination' btn is pressed
         Intent intent = new Intent(this, DestinationActivity.class);
         startActivity(intent);
     }
 
     public void showFlights(View view) {
+        //this when 'Search for flights' btn is pressed
         Intent intent = new Intent(this, FlightsActivity.class);
         startActivity(intent);
     }
 
     public void showNumberPicker(View view) {
+        //this when 'Set passengers' btn is pressed
         Intent intent = new Intent(this, PassengerSelectorActivity.class);
-        startActivity(intent);
+        intent.putExtra("ADULTS", adults_tv.getText());     //we must give the previous numbers from TextViews
+        intent.putExtra("CHILDREN", children_tv.getText());
+        intent.putExtra("INFANTS", infants_tv.getText());
+        startActivityForResult(intent, 1);
     }
 
-
+    @Override
+    //This method is when we finish() the children method
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) { //code==1 when we change data in PassengerSelectorActivity
+            adults_tv.setText(data.getStringExtra("ADULTS"));
+            children_tv.setText(data.getStringExtra("CHILDREN"));
+            infants_tv.setText(data.getStringExtra("INFANTS"));
+        }
+        else if (requestCode == 2) { //code==2 when we cancel in PassengerSelectorActivity
+            adults_tv.setText(data.getStringExtra("ADULTS"));
+            children_tv.setText(data.getStringExtra("CHILDREN"));
+            infants_tv.setText(data.getStringExtra("INFANTS"));
+        }
+    }
 }
