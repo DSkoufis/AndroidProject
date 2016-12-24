@@ -22,6 +22,9 @@ public class SearchFlightsActivity extends AppCompatActivity {
     private static TextView children_tv; //textView that shows the number of children that the user selected in PassengerSelectionActivity
     private static TextView infants_tv; //textView that shows the number of infants that the user selected in PassengerSelectionActivity
 
+    //strings that holds the name of the airports in IATA code format
+    private String origin_airport;
+    private String destination_airport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
