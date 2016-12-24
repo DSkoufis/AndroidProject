@@ -226,6 +226,7 @@
                 android:id="@+id/direct_flights"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
+                android:buttonTint="@color/button_blue"
                 />
         </LinearLayout>
 
