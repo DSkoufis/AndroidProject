@@ -9,13 +9,18 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * Class that gathers all data from user selections
+ * and calls the API to show the returned flights in FlightsActivity.java
+ */
+
 public class SearchFlightsActivity extends AppCompatActivity {
 
-    private static TextView location_tv;
-    private static TextView destination_tv;
-    private static TextView adults_tv;
-    private static TextView children_tv;
-    private static TextView infants_tv;
+    private static TextView location_tv; //textView that shows the city that user selected in OriginActivity.java
+    private static TextView destination_tv; //textView that shows the city that user selected in DestinationActivity.java
+    private static TextView adults_tv; //textView that shows the number of adults that the user selected in PassengerSelectonActivity
+    private static TextView children_tv; //textView that shows the number of children that the user selected in PassengerSelectonActivity
+    private static TextView infants_tv; //textView that shows the number of infants that the user selected in PassengerSelectonActivity
 
 
     @Override
@@ -23,6 +28,18 @@ public class SearchFlightsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_flights);
         this.setTitle("Select your search criteria");
+
+
+        /*
+         * This class have a spinner that allows the user to select the desirable seat type
+         * See string.xml for:
+         *   <string-array name="seats_array">
+         *       <item>Economy</item>
+         *       <item>Premium economy</item>
+         *       <item>Business class</item>
+         *       <item>First class</item>
+         *   </string-array>
+         */
         Spinner spinner = (Spinner) findViewById(R.id.seats_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -32,34 +49,14 @@ public class SearchFlightsActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
+
+
         location_tv = (TextView) findViewById(R.id.origin_text);
         destination_tv = (TextView) findViewById(R.id.destination_text);
         adults_tv = (TextView) findViewById(R.id.adults_text);
         children_tv = (TextView) findViewById(R.id.children_text);
         infants_tv = (TextView) findViewById(R.id.infants_text);
 
-        Button location_but = (Button) findViewById(R.id.set_origin);
-        Button destination_but = (Button) findViewById(R.id.set_destination);
-        location_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setLocation(v);
-            }
-        });
-        destination_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDestination(v);
-            }
-        });
-
-        Button passengers_but = (Button) findViewById(R.id.select_passengers_button);
-        passengers_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showNumberPicker();
-            }
-        });
 
     }
 
@@ -73,8 +70,14 @@ public class SearchFlightsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showNumberPicker() {
+    public void showFlights(View view) {
+        Intent intent = new Intent(this, FlightsActivity.class);
+        startActivity(intent);
+    }
 
+    public void showNumberPicker(View view) {
+        Intent intent = new Intent(this, PassengerSelectorActivity.class);
+        startActivity(intent);
     }
 
 

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchFlights(View view) {
         Intent intent = new Intent(this, SearchFlightsActivity.class);
-        startActivity(intent);
+        startActivity(intent); //start of SearchFlightsActivity.java class to go to criteria selection screens
     }
 
 }

@@ -19,6 +19,7 @@
         <activity android:name=".DestinationActivity" />
         <activity android:name=".FlightsActivity" />
         <activity android:name=".SearchFlightsActivity" />
+        <activity android:name=".PassengerSelectorActivity"></activity>
     </application>
 
 </manifest>
