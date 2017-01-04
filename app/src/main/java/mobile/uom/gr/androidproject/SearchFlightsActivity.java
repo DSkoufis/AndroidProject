@@ -58,24 +58,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
         this.setTitle("Select your search criteria");
 
 
-        /*
-         * This class have a spinner that allows the user to select the desirable seat type
-         * See string.xml for:
-         *   <string-array name="seats_array">
-         *       <item>Economy</item>
-         *       <item>Premium economy</item>
-         *       <item>Business class</item>
-         *       <item>First class</item>
-         *   </string-array>
-         */
-        Spinner spinner = (Spinner) findViewById(R.id.seats_spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.seats_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+
 
         location_tv = (TextView) findViewById(R.id.origin_text);
         destination_tv = (TextView) findViewById(R.id.destination_text);
