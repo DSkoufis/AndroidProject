@@ -36,6 +36,9 @@ public class SearchFlightsActivity extends AppCompatActivity {
     private String origin_airport;
     private String destination_airport;
 
+    //string that holds the seat type
+    private String seat_type;
+
     private static TextView tvdeparture_date; //date of leaving
     private static TextView tvreturn_date; //returning date
 
@@ -57,8 +60,9 @@ public class SearchFlightsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_flights);
         this.setTitle("Select your search criteria");
 
-
-
+        //Give the selected value of spinner on seat_type string
+        Spinner seat_types = (Spinner) findViewById(R.id.seats_spinner);
+        seat_type = String.valueOf(seat_types.getSelectedItem());
 
         location_tv = (TextView) findViewById(R.id.origin_text);
         destination_tv = (TextView) findViewById(R.id.destination_text);
