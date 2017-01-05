@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -237,16 +238,24 @@ public class SearchFlightsActivity extends AppCompatActivity {
     //This method is when we finish() the children method
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == 1) { //code==1 when we change data in PassengerSelectorActivity
             adults_tv.setText(data.getStringExtra("ADULTS"));
             children_tv.setText(data.getStringExtra("CHILDREN"));
             infants_tv.setText(data.getStringExtra("INFANTS"));
-        }
-        else if (requestCode == 2) { //code==2 when we cancel in PassengerSelectorActivity
+        } else if (requestCode == 2) { //code==2 when we cancel in PassengerSelectorActivity
             adults_tv.setText(data.getStringExtra("ADULTS"));
             children_tv.setText(data.getStringExtra("CHILDREN"));
             infants_tv.setText(data.getStringExtra("INFANTS"));
+        } else if (requestCode == 3) { //code==3 when we select airport from OriginActivity
+            Log.i("Origin returned data ", data.getStringExtra("AIRPORT") + " - " + data.getStringExtra("CODE"));
+            location_tv.setText(data.getStringExtra("AIRPORT"));
+            origin_airport = data.getStringExtra("CODE");
+        } else if (requestCode == 4) { //code==4 when we select airport from DestinationActivity
+            Log.i("Dest returned data ", data.getStringExtra("AIRPORT") + " - " + data.getStringExtra("CODE"));
+            destination_tv.setText(data.getStringExtra("AIRPORT"));
+            destination_airport = data.getStringExtra("CODE");
         }
-        //Todo: write code for requestCode 3(OriginActivity) and 4(DestinationActivity)
+
     }
 }
