@@ -26,7 +26,7 @@ public class AirportFinderFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        List<String> airports = new ArrayList<String>();
+        List<String> airports = new ArrayList<String>(); // The objects to represent in the ListView
 
         // creating the ArrayAdapter
         adapter_airports = new ArrayAdapter<String>(
