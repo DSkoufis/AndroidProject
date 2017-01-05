@@ -237,7 +237,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
     @Override
     //This method is when we finish() the children method
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) { //code==1 when we change data in PassengerSelectorActivity
             adults_tv.setText(data.getStringExtra("ADULTS"));
