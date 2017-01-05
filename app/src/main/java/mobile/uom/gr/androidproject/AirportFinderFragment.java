@@ -1,6 +1,8 @@
 package mobile.uom.gr.androidproject;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -44,6 +46,26 @@ public class AirportFinderFragment extends Fragment {
     private EditText editText_city;
     private Button button_search;
 
+    /* ------------------------------------------------------------------------------------------------ */
+    // interface to communicate with parent activity (solution found on stackoverflow)
+    public interface OnDataPass {
+        public void onDataPass(String data);
+    }
+    OnDataPass someData;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            someData = (OnDataPass) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnHeadlineSelectedListener");
+        }
+    }
+    /* ------------------------------------------------------------------------------------------------ */
 
     @Nullable
     @Override
@@ -89,31 +111,8 @@ public class AirportFinderFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = getActivity().getIntent();          // getting the intent which called this fragment is necessary
-                String code = intent.getStringExtra("ACTIVITY");    // because we must know if origin or destination called us
-
-                Intent output = new Intent();
-                output.putExtra("AIRPORT", adapter_airports.getItem(position)); //getting the item that clicked
-
                 String airport = adapter_airports.getItem(position).toString();
-                // Very wrong way to take the airport code but it works!
-                String airport_code = Character.toString(airport.charAt(0)) +
-                        Character.toString(airport.charAt(1)) +
-                        Character.toString(airport.charAt(2));
-                output.putExtra("CODE", airport_code);
-
-                // Logging
-                Log.i("Item position ", String.valueOf(position));
-                Log.i("Selected airport ", airport);
-                Log.i("Airport code ", airport_code);
-
-                if(code.equals("ORIGIN")) {
-                    getActivity().setResult(3, output);
-                }
-                else {
-                    getActivity().setResult(4,output);
-                }
-                getActivity().finish();
+                someData.onDataPass(airport); // passing the string with the data to container Activity to return to parent
             }
         });
 

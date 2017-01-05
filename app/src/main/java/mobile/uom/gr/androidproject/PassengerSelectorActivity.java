@@ -52,6 +52,7 @@ public class PassengerSelectorActivity extends AppCompatActivity {
         output.putExtra("ADULTS", adults);      //In cancel, we return the previous picked numbers
         output.putExtra("CHILDREN", children);  //which we are having in the 3 Strings
         output.putExtra("INFANTS", infants);
+        // TODO: must change the code number
         setResult(2,output);                    //the code when 'Cancel' is pressed
         finish();
     }
@@ -70,6 +71,7 @@ public class PassengerSelectorActivity extends AppCompatActivity {
         output.putExtra("ADULTS", String.valueOf(npAdults.getValue()));     //with these we return the new numbers that user picked
         output.putExtra("CHILDREN", String.valueOf(npChildren.getValue()));
         output.putExtra("INFANTS", String.valueOf(npInfants.getValue()));
+        // TODO: must change the code number
         setResult(1,output); //the code when 'OK' is pressed
         finish();
     }

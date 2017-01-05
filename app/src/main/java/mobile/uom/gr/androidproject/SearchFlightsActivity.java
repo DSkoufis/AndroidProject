@@ -256,6 +256,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
             destination_tv.setText(data.getStringExtra("AIRPORT"));
             destination_airport = data.getStringExtra("CODE");
         }
+        // TODO: Change the codes to return all 1, but adding one more element to distinguish
 
     }
 }
