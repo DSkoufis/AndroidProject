@@ -219,6 +219,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
             return;
         }
         //this when 'Search for flights' btn is pressed
+        //Todo: fill the putExtra for API call
         Intent intent = new Intent(this, FlightsActivity.class);
         startActivity(intent);
     }
@@ -246,5 +247,6 @@ public class SearchFlightsActivity extends AppCompatActivity {
             children_tv.setText(data.getStringExtra("CHILDREN"));
             infants_tv.setText(data.getStringExtra("INFANTS"));
         }
+        //Todo: write code for requestCode 3(OriginActivity) and 4(DestinationActivity)
     }
 }

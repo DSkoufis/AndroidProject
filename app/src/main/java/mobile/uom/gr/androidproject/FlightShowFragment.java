@@ -3,8 +3,8 @@ package mobile.uom.gr.androidproject;
 import android.app.Fragment;
 
 /**
- * Class that shows flight details from a selected flight
- * from FlightsActivity.java
+ * Class that shows flight details when user selects a flight
+ * from FlightsActivity.java ListView
  */
 
 public class FlightShowFragment extends Fragment {

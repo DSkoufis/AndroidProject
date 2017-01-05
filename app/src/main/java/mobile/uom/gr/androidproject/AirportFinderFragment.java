@@ -64,3 +64,5 @@ public class AirportFinderFragment extends Fragment {
         return view;
     }
 }
+
+//Todo: make the API call to find airport code and name

@@ -3,8 +3,8 @@ package mobile.uom.gr.androidproject;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-/**
- * Class that shows the returned flights from API
+/*
+ * Class that fills the ListView and shows the API response
  */
 
 public class FlightsActivity extends AppCompatActivity {
