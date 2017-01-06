@@ -73,7 +73,6 @@ public class PassengerSelectorActivity extends AppCompatActivity {
         output.putExtra("CHILDREN", String.valueOf(npChildren.getValue()));
         output.putExtra("INFANTS", String.valueOf(npInfants.getValue()));
         output.putExtra("CHECK", "SPINNER_SUCCESS");
-        // TODO: must change the code number
         setResult(1,output); //the code when 'OK' is pressed
         finish();
     }
