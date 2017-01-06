@@ -19,6 +19,8 @@
     <string name="children">Children</string>
     <string name="adults">Adults</string>
 
+    <string name="search_button">Search</string>
+
 
     <string-array name="seats_array">
         <item>Economy</item>

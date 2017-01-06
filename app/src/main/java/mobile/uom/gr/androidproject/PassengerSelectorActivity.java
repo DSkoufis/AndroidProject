@@ -1,5 +1,6 @@
 package mobile.uom.gr.androidproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -52,7 +53,8 @@ public class PassengerSelectorActivity extends AppCompatActivity {
         output.putExtra("ADULTS", adults);      //In cancel, we return the previous picked numbers
         output.putExtra("CHILDREN", children);  //which we are having in the 3 Strings
         output.putExtra("INFANTS", infants);
-        setResult(2,output);                    //the code when 'Cancel' is pressed
+        output.putExtra("CHECK", "SPINNER_CANCEL");
+        setResult(1,output);                    //the code when 'Cancel' is pressed
         finish();
     }
 
@@ -70,6 +72,8 @@ public class PassengerSelectorActivity extends AppCompatActivity {
         output.putExtra("ADULTS", String.valueOf(npAdults.getValue()));     //with these we return the new numbers that user picked
         output.putExtra("CHILDREN", String.valueOf(npChildren.getValue()));
         output.putExtra("INFANTS", String.valueOf(npInfants.getValue()));
+        output.putExtra("CHECK", "SPINNER_SUCCESS");
+        // TODO: must change the code number
         setResult(1,output); //the code when 'OK' is pressed
         finish();
     }

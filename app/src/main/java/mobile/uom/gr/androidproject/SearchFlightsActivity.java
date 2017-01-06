@@ -6,18 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-
+import java.util.StringTokenizer;
 
 /**
  * Class that gathers all data from user selections
@@ -26,11 +24,19 @@ import java.util.Date;
 
 public class SearchFlightsActivity extends AppCompatActivity {
 
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /* Bellow variables are the TextViews that show the data before user decide to search for flights */
+
     private static TextView location_tv; //textView that shows the city that user selected in OriginActivity.java
     private static TextView destination_tv; //textView that shows the city that user selected in DestinationActivity.java
     private static TextView adults_tv; //textView that shows the number of adults that the user selected in PassengerSelectionActivity
     private static TextView children_tv; //textView that shows the number of children that the user selected in PassengerSelectionActivity
     private static TextView infants_tv; //textView that shows the number of infants that the user selected in PassengerSelectionActivity
+    private static TextView tvdeparture_date; //date of leaving
+    private static TextView tvreturn_date; //returning date
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+            /* Bellow variables are for api call when btn is pressed */
 
     //strings that holds the name of the airports in IATA code format
     private String origin_airport;
@@ -39,12 +45,12 @@ public class SearchFlightsActivity extends AppCompatActivity {
     //string that holds the seat type
     private String seat_type;
 
-    private static TextView tvdeparture_date; //date of leaving
-    private static TextView tvreturn_date; //returning date
-
     //these hold the date in ISO format for API call
     private String departure_date;
     private String return_date;
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+            /* Bellow variables are only for checking if user selected correct date */
 
     //these hold the dates for checking if departure date is prior of return date
     private int dept_year;
@@ -53,6 +59,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
     private int ret_year;
     private int ret_month;
     private int ret_day;
+
+    /*-----------------------------------------------------------------------------------------------------------------------*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,13 +172,15 @@ public class SearchFlightsActivity extends AppCompatActivity {
     public void setLocation(View view) {
         //this when 'Select your origin' btn is pressed
         Intent intent = new Intent(this, OriginActivity.class);
-        startActivity(intent);
+        intent.putExtra("ACTIVITY", "ORIGIN"); // this is for OriginActivity to know which btn open the Fragment
+        startActivityForResult(intent, 1);
     }
 
     public void setDestination(View view) {
         //this when 'Select your destination' btn is pressed
         Intent intent = new Intent(this, DestinationActivity.class);
-        startActivity(intent);
+        intent.putExtra("ACTIVITY", "DESTINATION"); // this is for DestinationActivity to know which btn open the Fragment
+        startActivityForResult(intent, 1);
     }
 
     public void showFlights(View view) {
@@ -211,6 +221,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
             return;
         }
         //this when 'Search for flights' btn is pressed
+        //Todo: fill the putExtra for API call
         Intent intent = new Intent(this, FlightsActivity.class);
         startActivity(intent);
     }
@@ -227,16 +238,44 @@ public class SearchFlightsActivity extends AppCompatActivity {
     @Override
     //This method is when we finish() the children method
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) { //code==1 when we change data in PassengerSelectorActivity
-            adults_tv.setText(data.getStringExtra("ADULTS"));
-            children_tv.setText(data.getStringExtra("CHILDREN"));
-            infants_tv.setText(data.getStringExtra("INFANTS"));
-        }
-        else if (requestCode == 2) { //code==2 when we cancel in PassengerSelectorActivity
-            adults_tv.setText(data.getStringExtra("ADULTS"));
-            children_tv.setText(data.getStringExtra("CHILDREN"));
-            infants_tv.setText(data.getStringExtra("INFANTS"));
+        String check; // this String holds the code, to know which activity returned the results
+
+        /*
+         * check CODES:
+         * SPINNER_SUCCESS: if user selected the correct amount of passengers and hit OK on PassengerSelectorActivity
+         * SPINNER_CANCEL: if user selected cancel button on PassengerSelectorActivity
+         * ORIGIN_AIRPORT: this is the "check code" if the activity which returned the results is OriginActivity
+         * DESTINATION_AIRPORT: this is the "check code" if the activity which returned the results is DestinationActivity
+         */
+
+        if (requestCode == 1) { // we requested code==1 so if it is, it is a success
+            check = data.getStringExtra("CHECK");
+            if (resultCode == 1) {
+                if (check.equals("SPINNER_SUCCESS")) {
+                    // setting the data at the correct TextViews
+                    adults_tv.setText(data.getStringExtra("ADULTS"));
+                    children_tv.setText(data.getStringExtra("CHILDREN"));
+                    infants_tv.setText(data.getStringExtra("INFANTS"));
+                } else if (check.equals("SPINNER_CANCEL")) {
+                    // setting the data at the correct TextViews
+                    adults_tv.setText(data.getStringExtra("ADULTS"));
+                    children_tv.setText(data.getStringExtra("CHILDREN"));
+                    infants_tv.setText(data.getStringExtra("INFANTS"));
+                } else if (check.equals("ORIGIN_AIRPORT")) {
+                    // setting the data at the correct TextView
+                    location_tv.setText(data.getStringExtra("AIRPORT"));
+                    // keeping the code for further use
+                    origin_airport = data.getStringExtra("CODE");
+                } else if (check.equals("DESTINATION_AIRPORT")) {
+                    // setting the data at the correct TextView
+                    destination_tv.setText(data.getStringExtra("AIRPORT"));
+                    // keeping the code for further use
+                    destination_airport = data.getStringExtra("CODE");
+                }
+            }
+        } else {
+            // logging if something goes wrong to find where is the problem
+            Log.i("ERROR- rqC:", String.valueOf(requestCode) + " - rsC:" + String.valueOf(resultCode));
         }
     }
 }
