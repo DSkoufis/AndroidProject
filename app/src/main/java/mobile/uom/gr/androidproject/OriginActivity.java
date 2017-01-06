@@ -29,35 +29,8 @@ public class OriginActivity extends AppCompatActivity implements AirportFinderFr
         Character.toString(airport.charAt(1)) +
         Character.toString(airport.charAt(2));
         output.putExtra("CODE", airport_code);
-
-        // TODO: must change the code number
-        setResult(3, output);
+        output.putExtra("CHECK", "ORIGIN_AIRPORT");
+        setResult(1, output);
         finish();
     }
 }
-
-//          Intent intent = getActivity().getIntent();          // getting the intent which called this fragment is necessary
-//          String code = intent.getStringExtra("ACTIVITY");    // because we must know if origin or destination called us
-//
-//          Intent output = new Intent();
-//          output.putExtra("AIRPORT", adapter_airports.getItem(position)); //getting the item that clicked
-//
-//          String airport = adapter_airports.getItem(position).toString();
-//          // Not pretty way to take the airport code but it works!
-//        String airport_code = Character.toString(airport.charAt(0)) +
-//        Character.toString(airport.charAt(1)) +
-//        Character.toString(airport.charAt(2));
-//        output.putExtra("CODE", airport_code);
-//
-//        // Logging
-//        Log.i("Item position ", String.valueOf(position));
-//        Log.i("Selected airport ", airport);
-//        Log.i("Airport code ", airport_code);
-//
-//        if(code.equals("ORIGIN")) {
-//        getActivity().setResult(3, output);
-//        }
-//        else {
-//        getActivity().setResult(4,output);
-//        }
-//        getActivity().finish();

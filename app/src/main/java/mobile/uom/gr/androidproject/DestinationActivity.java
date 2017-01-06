@@ -29,9 +29,8 @@ public class DestinationActivity extends AppCompatActivity implements AirportFin
                 Character.toString(airport.charAt(1)) +
                 Character.toString(airport.charAt(2));
         output.putExtra("CODE", airport_code);
-
-        // TODO: must change the code number
-        setResult(4, output);
+        output.putExtra("CHECK", "DESTINATION_AIRPORT");
+        setResult(1, output);
         finish();
     }
 }

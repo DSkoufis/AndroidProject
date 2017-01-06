@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 /**
  * Class that gathers all data from user selections
@@ -237,26 +238,44 @@ public class SearchFlightsActivity extends AppCompatActivity {
     @Override
     //This method is when we finish() the children method
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
+        String check; // this String holds the code, to know which activity returned the results
 
-        if (requestCode == 1) { //code==1 when we change data in PassengerSelectorActivity
-            adults_tv.setText(data.getStringExtra("ADULTS"));
-            children_tv.setText(data.getStringExtra("CHILDREN"));
-            infants_tv.setText(data.getStringExtra("INFANTS"));
-        } else if (requestCode == 2) { //code==2 when we cancel in PassengerSelectorActivity
-            adults_tv.setText(data.getStringExtra("ADULTS"));
-            children_tv.setText(data.getStringExtra("CHILDREN"));
-            infants_tv.setText(data.getStringExtra("INFANTS"));
-        } else if (requestCode == 3) { //code==3 when we select airport from OriginActivity
-            Log.i("Origin returned data ", data.getStringExtra("AIRPORT") + " - " + data.getStringExtra("CODE"));
-            location_tv.setText(data.getStringExtra("AIRPORT"));
-            origin_airport = data.getStringExtra("CODE");
-        } else if (requestCode == 4) { //code==4 when we select airport from DestinationActivity
-            Log.i("Dest returned data ", data.getStringExtra("AIRPORT") + " - " + data.getStringExtra("CODE"));
-            destination_tv.setText(data.getStringExtra("AIRPORT"));
-            destination_airport = data.getStringExtra("CODE");
+        /*
+         * check CODES:
+         * SPINNER_SUCCESS: if user selected the correct amount of passengers and hit OK on PassengerSelectorActivity
+         * SPINNER_CANCEL: if user selected cancel button on PassengerSelectorActivity
+         * ORIGIN_AIRPORT: this is the "check code" if the activity which returned the results is OriginActivity
+         * DESTINATION_AIRPORT: this is the "check code" if the activity which returned the results is DestinationActivity
+         */
+
+        if (requestCode == 1) { // we requested code==1 so if it is, it is a success
+            check = data.getStringExtra("CHECK");
+            if (resultCode == 1) {
+                if (check.equals("SPINNER_SUCCESS")) {
+                    // setting the data at the correct TextViews
+                    adults_tv.setText(data.getStringExtra("ADULTS"));
+                    children_tv.setText(data.getStringExtra("CHILDREN"));
+                    infants_tv.setText(data.getStringExtra("INFANTS"));
+                } else if (check.equals("SPINNER_CANCEL")) {
+                    // setting the data at the correct TextViews
+                    adults_tv.setText(data.getStringExtra("ADULTS"));
+                    children_tv.setText(data.getStringExtra("CHILDREN"));
+                    infants_tv.setText(data.getStringExtra("INFANTS"));
+                } else if (check.equals("ORIGIN_AIRPORT")) {
+                    // setting the data at the correct TextView
+                    location_tv.setText(data.getStringExtra("AIRPORT"));
+                    // keeping the code for further use
+                    origin_airport = data.getStringExtra("CODE");
+                } else if (check.equals("DESTINATION_AIRPORT")) {
+                    // setting the data at the correct TextView
+                    destination_tv.setText(data.getStringExtra("AIRPORT"));
+                    // keeping the code for further use
+                    destination_airport = data.getStringExtra("CODE");
+                }
+            }
+        } else {
+            // logging if something goes wrong to find where is the problem
+            Log.i("ERROR- rqC:", String.valueOf(requestCode) + " - rsC:" + String.valueOf(resultCode));
         }
-        // TODO: Change the codes to return all 1, but adding one more element to distinguish
-
     }
 }
