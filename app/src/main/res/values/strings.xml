@@ -2,6 +2,7 @@
     <string name="app_name">Nine11 Flights</string>
     <string name="activity_origin">Select where you start</string>
     <string name="activity_destination">Select your destination</string>
+    <string name="activity_flights">Results</string>
 
     <string name="departure_dp">Select departure date</string>
     <string name="return_dp">Select return date</string>

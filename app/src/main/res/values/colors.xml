@@ -7,5 +7,10 @@
     <color name="button_yellow">#FFB300</color>
     <color name="button_blue">#009688</color>
 
+    <color name="outbound_flight">#DCE775</color>
+    <color name="inbound_flight">#AED581</color>
+    <color name="flight">#1B5E20</color>
+    <color name="price">#FFA726</color>
+
     <color name="black_overlay">#66000000</color>
 </resources>

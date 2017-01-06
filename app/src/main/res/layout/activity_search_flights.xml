@@ -304,10 +304,11 @@
                 android:text="Direct flights only"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/direct_flights"
+                android:id="@+id/checkbox_direct_flights"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:buttonTint="@color/button_blue"
+                android:onClick="checkboxClicked"
                 />
         </LinearLayout>
 

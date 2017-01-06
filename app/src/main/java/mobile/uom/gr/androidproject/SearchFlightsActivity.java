@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,6 +46,9 @@ public class SearchFlightsActivity extends AppCompatActivity {
     //string that holds the seat type
     private String seat_type;
 
+    //value that holds if selection is direct flights or not
+    private boolean direct_flights = false;
+
     //these hold the date in ISO format for API call
     private String departure_date;
     private String return_date;
@@ -71,6 +76,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
         Spinner seat_types = (Spinner) findViewById(R.id.seats_spinner);
         seat_type = String.valueOf(seat_types.getSelectedItem());
 
+        //Init
         location_tv = (TextView) findViewById(R.id.origin_text);
         destination_tv = (TextView) findViewById(R.id.destination_text);
         adults_tv = (TextView) findViewById(R.id.adults_text);
@@ -93,6 +99,19 @@ public class SearchFlightsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDialog(998);
+            }
+        });
+
+        //catching checkbox changes
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_direct_flights);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    direct_flights = isChecked;
+                } else {
+                    direct_flights = isChecked;
+                }
             }
         });
     }
@@ -228,6 +247,14 @@ public class SearchFlightsActivity extends AppCompatActivity {
         intent.putExtra("SEAT_TYPE", seat_type);
         intent.putExtra("DEPARTURE_DATE", departure_date);
         intent.putExtra("RETURN_DATE", return_date);
+        //finally we find if user selected direct flights or no
+        String isDirect;
+        if(direct_flights) {
+            isDirect = "true";
+        } else {
+            isDirect = "false";
+        }
+        intent.putExtra("IS_DIRECT", isDirect);
         startActivity(intent);
     }
 
