@@ -12,18 +12,32 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OriginActivity" />
-        <activity android:name=".DestinationActivity" />
-        <activity android:name=".FlightsActivity" />
-        <activity android:name=".SearchFlightsActivity" />
-        <activity android:name=".PassengerSelectorActivity"></activity>
+        <!-- This line: android:configChanges="orientation|screenSize" -->
+        <!-- Keeps the activity same after screen rotation -->
+        <activity
+            android:name=".OriginActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".DestinationActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".FlightsActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".SearchFlightsActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".PassengerSelectorActivity"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>
