@@ -15,7 +15,7 @@ public class FlightsActivity extends Activity {
         setContentView( R.layout.activity_flights);
         setTitle(R.string.activity_flights);
 
-        //TODO: list item and list view already done. Need to make API call and a custom adapter to fill the list view
+        //TODO: make API call and build a custom adapter to fill the list view with ListItems
 
     }
 }
