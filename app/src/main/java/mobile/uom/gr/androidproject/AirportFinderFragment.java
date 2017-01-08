@@ -46,7 +46,7 @@ public class AirportFinderFragment extends Fragment {
     /* ------------------------------------------------------------------------------------------------ */
     // interface to communicate with parent activity (solution found on stackoverflow)
     public interface OnDataPass {
-        public void onDataPass(String data);
+        void onDataPass(String data);
     }
     OnDataPass someData;
 
@@ -133,7 +133,7 @@ public class AirportFinderFragment extends Fragment {
             String responseJsonStr = null; // this will hold the raw JSON response as a String
 
             try {
-                // Contructing the parameters of the URL for the Amadeus Airport Autocomplete query
+                // Constructing the parameters of the URL for the Amadeus Airport Autocomplete query
                 // see https://sandbox.amadeus.com/travel-innovation-sandbox/apis/get/airports/autocomplete
                 final String baseUrl = "https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?";
                         // "apikey=123456789abcdefgh&term=lon"
