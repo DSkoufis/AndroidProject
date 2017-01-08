@@ -9,16 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+/*
+ * This activity is only for visual and starting the app
+ */
+
 public class MainActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
 
     public void searchFlights(View view) {
         Intent intent = new Intent(this, SearchFlightsActivity.class);

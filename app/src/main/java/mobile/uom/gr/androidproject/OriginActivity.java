@@ -29,8 +29,8 @@ public class OriginActivity extends AppCompatActivity implements AirportFinderFr
         Character.toString(airport.charAt(1)) +
         Character.toString(airport.charAt(2));
         output.putExtra("CODE", airport_code);
-        output.putExtra("CHECK", "ORIGIN_AIRPORT");
-        setResult(1, output);
+        output.putExtra("CHECK", "ORIGIN_AIRPORT"); // adding the code for onActivityResult to know which Activity
+        setResult(1, output);                       // returned the data
         finish();
     }
 }

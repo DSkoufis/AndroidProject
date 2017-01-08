@@ -53,8 +53,8 @@ public class PassengerSelectorActivity extends AppCompatActivity {
         output.putExtra("ADULTS", adults);      //In cancel, we return the previous picked numbers
         output.putExtra("CHILDREN", children);  //which we are having in the 3 Strings
         output.putExtra("INFANTS", infants);
-        output.putExtra("CHECK", "SPINNER_CANCEL");
-        setResult(1,output);                    //the code when 'Cancel' is pressed
+        output.putExtra("CHECK", "SPINNER_CANCEL"); // adding the code for onActivityResult to know which Activity
+        setResult(1,output);                        // returned the data
         finish();
     }
 
@@ -67,13 +67,13 @@ public class PassengerSelectorActivity extends AppCompatActivity {
             onSuccess();
     }
 
-    public void onSuccess() { //this method is when user picks all passengers right
+    public void onSuccess() { //this method is when user picks all passengers correct
         Intent output = new Intent();
         output.putExtra("ADULTS", String.valueOf(npAdults.getValue()));     //with these we return the new numbers that user picked
         output.putExtra("CHILDREN", String.valueOf(npChildren.getValue()));
         output.putExtra("INFANTS", String.valueOf(npInfants.getValue()));
-        output.putExtra("CHECK", "SPINNER_SUCCESS");
-        setResult(1,output); //the code when 'OK' is pressed
+        output.putExtra("CHECK", "SPINNER_SUCCESS"); // adding the code for onActivityResult to know which Activity
+        setResult(1, output);                        // returned the data
         finish();
     }
 

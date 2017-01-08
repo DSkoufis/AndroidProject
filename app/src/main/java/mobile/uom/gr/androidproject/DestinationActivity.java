@@ -24,13 +24,14 @@ public class DestinationActivity extends AppCompatActivity implements AirportFin
         Intent output = new Intent();
         output.putExtra("AIRPORT", airport);
 
-        // Not pretty way to take the airport code but it works!
+        // Not pretty way to take the airport code but it works
+        // because airport code is always the first 3 chars! ex SKG - Thessaloniki - [SKG]
         String airport_code = Character.toString(airport.charAt(0)) +
                 Character.toString(airport.charAt(1)) +
                 Character.toString(airport.charAt(2));
         output.putExtra("CODE", airport_code);
-        output.putExtra("CHECK", "DESTINATION_AIRPORT");
-        setResult(1, output);
+        output.putExtra("CHECK", "DESTINATION_AIRPORT"); // adding the code for onActivityResult to know which Activity
+        setResult(1, output);                            // returned the data
         finish();
     }
 }

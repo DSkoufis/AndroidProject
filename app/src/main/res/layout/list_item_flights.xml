@@ -8,6 +8,8 @@
     android:layout_margin="10dp"
     >
 
+    <!-- See ReadMe text file in app/src/main/ReadMe for visual representation of this ListView Item -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"

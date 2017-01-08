@@ -107,11 +107,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    direct_flights = isChecked;
-                } else {
-                    direct_flights = isChecked;
-                }
+                direct_flights = isChecked; // saving the changes every time user change it
             }
         });
     }

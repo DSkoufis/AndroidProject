@@ -201,7 +201,8 @@ public class AirportFinderFragment extends Fragment {
                 }
             }
             try {
-                return getDataFromJson(responseJsonStr);
+                return getDataFromJson(responseJsonStr); // try to return the Json in the format we want
+                                                        // by calling getDataFromJson (see bellow for the method)
             } catch (JSONException e) {
                 Log.e(e.getMessage(), String.valueOf(e));
                 e.printStackTrace();
@@ -247,7 +248,7 @@ public class AirportFinderFragment extends Fragment {
                 // put them in the results String in format as said above
                 resultStrs[i] = value + " - " + label;
             }
-            // logging the data
+            // logging the data for no reason but why not?
             for (String s : resultStrs) {
                 Log.v("Airport: ", s);
             }
