@@ -164,6 +164,7 @@ public class FlightsActivity extends Activity {
             // and start new SearchFlights Activity
             Intent intent = new Intent(this, SearchFlightsActivity.class);
             startActivity(intent);
+            return; // we need this to terminate this Activity from executing further code
         }
 
         // TODO: fill this
