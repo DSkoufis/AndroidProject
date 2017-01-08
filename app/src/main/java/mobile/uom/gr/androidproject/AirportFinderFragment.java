@@ -185,7 +185,7 @@ public class AirportFinderFragment extends Fragment {
                 e.printStackTrace();
             } catch (Exception e) {
                 Log.e("Error ", String.valueOf(e));
-                // If the code didn't successfully get the weather data, there's no point in attempting
+                // If the code didn't successfully get the airports data, there's no point in attempting
                 // to parse it.
                 return null;
             } finally {

@@ -8,18 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /*
  * Class that fills the ListView and shows the API response
@@ -137,7 +132,7 @@ public class FlightsActivity extends Activity {
 
             } catch (Exception e) {
                 Log.e("Error ", String.valueOf(e));
-                // If the code didn't successfully get the weather data, there's no point in attempting
+                // If the code didn't successfully get the flights data, there's no point in attempting
                 // to parse it.
                 return null;
             } finally {
