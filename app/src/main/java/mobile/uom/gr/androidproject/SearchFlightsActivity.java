@@ -66,6 +66,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
     /*-----------------------------------------------------------------------------------------------------------------------*/
 
+    private Toast mToast; // toast that shows errors (we need this var because we need to cancel previous Toast messages)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,7 +145,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
             tvdeparture_date.setText(new StringBuilder().append(fday).append(" - ")
                     .append(fmonth).append(" - ").append(year).append(" "));
-            departure_date = fmonth + "-" + fday + "-" + year;
+            departure_date = year + "-" + fmonth + "-" + fday;
             dept_day = day;
             dept_month=month+1;
             dept_year=year;
@@ -170,7 +172,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
             }
             tvreturn_date.setText(new StringBuilder().append(fday).append(" - ")
                     .append(fmonth).append(" - ").append(year).append(" "));
-            return_date = fmonth + "-" + fday + "-" + year;
+            return_date = year + "-" + fmonth + "-" + fday;
             ret_day = day;
             ret_month=month+1;
             ret_year=year;
@@ -194,7 +196,6 @@ public class SearchFlightsActivity extends AppCompatActivity {
     public void showFlights(View view) {
         Context content = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
-        Toast toast;
 
         //toast = Toast.makeText(content, "", duration);
         Calendar c = Calendar.getInstance();
@@ -202,30 +203,41 @@ public class SearchFlightsActivity extends AppCompatActivity {
         int month = c.get(Calendar.MONTH)+1;
         int day = c.get(Calendar.DAY_OF_MONTH);
 
+        //canceling previous Toast messages (if any)
+        if(mToast != null){
+            mToast.cancel();
+        }
+
+        //TODO: check if user has filled all data before clicking "Search flights"
+        /* must have: origin and destinations airports, passengers, departure and arrival dates */
+
+        //trying to find out if returning day is prior departure which is wrong or if user selected dates
+        while (dept_year > ret_year || dept_month > ret_month || dept_day > ret_day || departure_date.equals("") || return_date.equals("")) {
+            if (dept_year > ret_year)
+                mToast = Toast.makeText(content, "Departure day must be prior return", duration);
+            else if (dept_month > ret_month && dept_year == ret_year)
+                mToast = Toast.makeText(content, "Departure day must be prior return", duration);
+            else if (dept_day > ret_day && dept_month == ret_month && dept_year == ret_year)
+                mToast = Toast.makeText(content, "Departure day must be prior return", duration);
+            else if (departure_date.equals("") || return_date.equals(""))
+                mToast = Toast.makeText(content, "You must select days", duration);
+            else
+                break;
+            mToast.show();
+            return;
+        }
+
         //trying to find out if departure date is prior today which is wrong
         while (year > dept_year || month > dept_month || day > dept_day) {
             if (year > dept_year)
-                toast = Toast.makeText(content, "Wrong departure date!", duration);
+                mToast = Toast.makeText(content, "Wrong departure date!", duration);
             else if (month > dept_month && year == dept_year)
-                toast = Toast.makeText(content, "Wrong departure date!", duration);
+                mToast = Toast.makeText(content, "Wrong departure date!", duration);
             else if (day > dept_day && month == dept_month && year == dept_year)
-                toast = Toast.makeText(content, "Wrong departure date!", duration);
+                mToast = Toast.makeText(content, "Wrong departure date!", duration);
             else
                 break;
-            toast.show();
-            return;
-        }
-        //trying to find out if returning day is prior departure which is wrong
-        while (dept_year > ret_year || dept_month > ret_month || dept_day > ret_day) {
-            if (dept_year > ret_year)
-                toast = Toast.makeText(content, "Departure day must be prior return", duration);
-            else if (dept_month > ret_month && dept_year == ret_year)
-                toast = Toast.makeText(content, "Departure day must be prior return", duration);
-            else if (dept_day > ret_day && dept_month == ret_month && dept_year == ret_year)
-                toast = Toast.makeText(content, "Departure day must be prior return", duration);
-            else
-                break;
-            toast.show();
+            mToast.show();
             return;
         }
 
@@ -237,6 +249,10 @@ public class SearchFlightsActivity extends AppCompatActivity {
         intent.putExtra("SEAT_TYPE", seat_type);
         intent.putExtra("DEPARTURE_DATE", departure_date);
         intent.putExtra("RETURN_DATE", return_date);
+        intent.putExtra("ADULTS", adults_tv.getText().toString());
+        intent.putExtra("CHILDREN", children_tv.getText().toString());
+        intent.putExtra("INFANTS", infants_tv.getText().toString());
+
         //finally we find if user selected direct flights or no
         String isDirect;
         if(checkBox.isChecked()) {
