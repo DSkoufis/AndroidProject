@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -51,7 +52,7 @@ public class FlightsActivity extends Activity {
         infants = intent.getStringExtra("INFANTS");
         departure_date = intent.getStringExtra("DEPARTURE_DATE");
         returning_date = intent.getStringExtra("RETURN_DATE");
-        seat_type = intent.getStringExtra("SEAT_TYPE");
+        seat_type = intent.getStringExtra("SEAT_TYPE").toUpperCase();
         isDirect = intent.getStringExtra("IS_DIRECT");
 
         // calling the Amadeus
@@ -161,7 +162,17 @@ public class FlightsActivity extends Activity {
     }
 
     public void printingData(String responseJsonStr) {
+
+        if (responseJsonStr == null) { // if there are no results
+            // show an error Toast
+            Toast.makeText(getApplicationContext(), "No results found", Toast.LENGTH_LONG).show();
+            // and start new SearchFlights Activity
+            Intent intent = new Intent(this, SearchFlightsActivity.class);
+            startActivity(intent);
+        }
+
         // TODO: fill this
+        Log.i("JSON response till now", "ALL FINE");
 
     }
 }

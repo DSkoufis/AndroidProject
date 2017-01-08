@@ -145,7 +145,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
             tvdeparture_date.setText(new StringBuilder().append(fday).append(" - ")
                     .append(fmonth).append(" - ").append(year).append(" "));
-            departure_date = fmonth + "-" + fday + "-" + year;
+            departure_date = year + "-" + fmonth + "-" + fday;
             dept_day = day;
             dept_month=month+1;
             dept_year=year;
@@ -172,7 +172,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
             }
             tvreturn_date.setText(new StringBuilder().append(fday).append(" - ")
                     .append(fmonth).append(" - ").append(year).append(" "));
-            return_date = fmonth + "-" + fday + "-" + year;
+            return_date = year + "-" + fmonth + "-" + fday;
             ret_day = day;
             ret_month=month+1;
             ret_year=year;
