@@ -46,8 +46,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
     //string that holds the seat type
     private String seat_type;
 
-    //value that holds if selection is direct flights or not
-    private boolean direct_flights = false;
+    //checkbox that holds if selection is direct flights or not
+    private CheckBox checkBox;
 
     //these hold the date in ISO format for API call
     private String departure_date;
@@ -89,6 +89,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
         Button select_dep_btn = (Button) findViewById(R.id.departure_btn);
         Button select_arr_btn = (Button) findViewById(R.id.return_btn);
 
+        checkBox = (CheckBox) findViewById(R.id.checkbox_direct_flights);
+
         select_dep_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,14 +104,6 @@ public class SearchFlightsActivity extends AppCompatActivity {
             }
         });
 
-        //catching checkbox changes
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox_direct_flights);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                direct_flights = isChecked; // saving the changes every time user change it
-            }
-        });
     }
 
     //this must be imported for datepicker dialog
@@ -245,7 +239,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
         intent.putExtra("RETURN_DATE", return_date);
         //finally we find if user selected direct flights or no
         String isDirect;
-        if(direct_flights) {
+        if(checkBox.isChecked()) {
             isDirect = "true";
         } else {
             isDirect = "false";
