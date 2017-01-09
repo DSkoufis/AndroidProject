@@ -264,5 +264,9 @@ public class FlightsActivity extends Activity {
         // Creating the custom adapter
         myAdapter = new CustomAdapter(this, getResources(), flight_list);
         myList.setAdapter(myAdapter);
+
+        //TODO: from here we can display a Fragment if user clicks on an item, and show details of the flight
+        // like: operating airlines, better details in middle stops etc...
+        // but I believe that's for another semester
     }
 }
