@@ -178,7 +178,6 @@ public class FlightsActivity extends Activity {
             return; // we need this to terminate this Activity from executing further code
         }
 
-        // TODO: fill this
         Log.i("JSON response till now", "ALL FINE");
 
         ArrayList<FlightModel> flight_list = new ArrayList<FlightModel>();
@@ -251,6 +250,8 @@ public class FlightsActivity extends Activity {
                         an_inbound_flight += "-" + an_in_flightJson.getJSONObject(DESTINATION).getString("airport");
                     }
                 }
+
+                //TODO: give better appearance at displayed time (now its yy-MM-ddThh-mm ISO 8601 format)
 
                 FlightModel aFlight = new FlightModel(an_outbound_flight, an_outbound_flight_time,
                         an_inbound_flight, an_inbound_flight_time, a_price);
