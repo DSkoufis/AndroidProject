@@ -19,45 +19,25 @@ public class FlightModel {
         outbound_flight_time = out_time;
     }
 
-    /****** Getters and Setters ******/
+    /****** Getters ******/
 
     public String getTotal_price() {
         return total_price;
-    }
-
-    public void setTotal_price(String total_price) {
-        this.total_price = total_price;
     }
 
     public String getInbound_flight() {
         return inbound_flight;
     }
 
-    public void setInbound_flight(String inbound_flight) {
-        this.inbound_flight = inbound_flight;
-    }
-
     public String getInbound_flight_time() {
         return inbound_flight_time;
-    }
-
-    public void setInbound_flight_time(String inbound_flight_time) {
-        this.inbound_flight_time = inbound_flight_time;
     }
 
     public String getOutbound_flight() {
         return outbound_flight;
     }
 
-    public void setOutbound_flight(String outbound_flight) {
-        this.outbound_flight = outbound_flight;
-    }
-
     public String getOutbound_flight_time() {
         return outbound_flight_time;
-    }
-
-    public void setOutbound_flight_time(String outbound_flight_time) {
-        this.outbound_flight_time = outbound_flight_time;
     }
 }
