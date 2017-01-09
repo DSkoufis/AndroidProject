@@ -230,7 +230,7 @@ public class AirportFinderFragment extends Fragment {
             // Response is always an Array
             JSONArray responseArray = new JSONArray(responseJsonStr);
 
-            // this way we can fing how many airports it returned
+            // this way we can find how many airports it returned
             String[] resultStrs = new String[responseArray.length()];
 
             for (int i = 0; i < responseArray.length(); i++) {
