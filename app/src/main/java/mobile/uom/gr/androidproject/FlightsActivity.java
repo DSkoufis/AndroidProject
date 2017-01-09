@@ -6,7 +6,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 /*
@@ -32,11 +38,16 @@ public class FlightsActivity extends Activity {
     String seat_type;
     String isDirect;
 
+    CustomAdapter myAdapter;
+    ListView myList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_flights);
         setTitle(R.string.activity_flights);
+
+        myList = (ListView) findViewById(R.id.listView_flights);
 
         // getting the extra data from Intent
         Intent intent = getIntent();
@@ -170,5 +181,87 @@ public class FlightsActivity extends Activity {
         // TODO: fill this
         Log.i("JSON response till now", "ALL FINE");
 
+        ArrayList<FlightModel> flight_list = new ArrayList<FlightModel>();
+
+        // These are the names of JSON objects we want to extract
+        final String RESULTS = "results"; // (ARRAY) it holds objects of all the flights results
+        final String ITINERARIES = "itineraries"; // it holds the details of a single trip (outbound - inbound)
+        final String FARE = "fare"; // it holds the fare details
+        final String TOTAL_PRICE = "total_price"; // it holds the total price of the flight
+        final String OUTBOUND = "outbound"; // it holds the outbound flight
+        final String INBOUND = "inbound"; // it holds the inbound flight
+        final String FLIGHTS = "flights"; // (ARRAY) it holds the objects of flights of the trip
+        final String DEPART = "departs_at"; // it holds the time of departure in ISO 8601 format
+        final String ORIGIN = "origin"; // it holds the origin airport
+        final String DESTINATION = "destination"; // it holds the destination airport
+
+        try {
+
+            // turning String into JSON object
+            JSONObject resultJson = new JSONObject(responseJsonStr);
+            JSONArray resultsArray = resultJson.getJSONArray(RESULTS);
+
+            // getting all results one by one
+            for(int i = 0; i < resultsArray.length(); i++) {
+                // these will be used to hold the Strings that we later set into TextViews
+                String an_outbound_flight = "";
+                String an_outbound_flight_time = "";
+                String an_inbound_flight = "";
+                String an_inbound_flight_time = "";
+                String a_price = "";
+
+                JSONObject flightJson = resultsArray.getJSONObject(i);
+
+                // getting the total price
+                JSONObject fareJson = flightJson.getJSONObject(FARE); // first we need to enter the "fare" object
+                a_price = fareJson.getString(TOTAL_PRICE); // so now we have a String with the total price of trip
+
+                // entering the "itineraries" ARRAY to get the flight's details
+                JSONArray itinerariesArray = flightJson.getJSONArray(ITINERARIES);
+
+                /* NOTE: "itineraries" array usually holds more that one objects
+                 *       unfortunately I don't know what is the difference from the first object
+                 *       so we are using only the first (0) object to show flights */
+                JSONObject flightDetailsJson = itinerariesArray.getJSONObject(0);
+
+                // first we are working on outbound flight
+                JSONObject out_flightsJson = flightDetailsJson.getJSONObject(OUTBOUND);
+                JSONArray out_flightsArray = out_flightsJson.getJSONArray(FLIGHTS);
+                for (int x = 0; x < out_flightsArray.length(); x++) { // getting all flights one by one
+                    JSONObject an_out_flightJson = out_flightsArray.getJSONObject(x);
+                    if (x == 0) { // only for the first flight
+                        an_outbound_flight_time = an_out_flightJson.getString(DEPART);
+                        an_outbound_flight = an_out_flightJson.getJSONObject(ORIGIN).getString("airport") +
+                                "-" + an_out_flightJson.getJSONObject(DESTINATION).getString("airport");
+                    } else {
+                        an_outbound_flight += "-" + an_out_flightJson.getJSONObject(DESTINATION).getString("airport");
+                    }
+                }
+
+                // second we are working on inbound flight
+                JSONObject in_flightsJson = flightDetailsJson.getJSONObject(INBOUND);
+                JSONArray in_flightsArray = in_flightsJson.getJSONArray(FLIGHTS);
+                for (int x = 0; x < in_flightsArray.length(); x++) {
+                    JSONObject an_in_flightJson = in_flightsArray.getJSONObject(x);
+                    if (x == 0) { // only for the first loop
+                        an_inbound_flight_time = an_in_flightJson.getString(DEPART);
+                        an_inbound_flight = an_in_flightJson.getJSONObject(ORIGIN).getString("airport") +
+                                "-" + an_in_flightJson.getJSONObject(DESTINATION).getString("airport");
+                    } else {
+                        an_inbound_flight += "-" + an_in_flightJson.getJSONObject(DESTINATION).getString("airport");
+                    }
+                }
+
+                FlightModel aFlight = new FlightModel(an_outbound_flight, an_outbound_flight_time,
+                        an_inbound_flight, an_inbound_flight_time, a_price);
+                flight_list.add(aFlight);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Creating the custom adapter
+        myAdapter = new CustomAdapter(this, getResources(), flight_list);
+        myList.setAdapter(myAdapter);
     }
 }
