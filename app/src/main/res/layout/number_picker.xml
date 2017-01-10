@@ -2,90 +2,129 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/color_background"
-    >
+    android:background="@color/color_background">
+
 
     <TextView
+        android:id="@+id/adults_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/adults_textView"
-        android:text="@string/adults"
-        android:textSize="25sp"
+        android:layout_marginTop="7dp"
         android:layout_toStartOf="@+id/children_textView"
-        />
+        android:text="@string/adults"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
 
 
     <NumberPicker
+        android:id="@+id/number_picker_children"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_picker_children"
         android:layout_below="@+id/children_textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp"
-        android:solidColor="@color/button_blue"
-        />
+        android:background="@drawable/button_bg_rounded_corners" />
 
-    <TextView
-        android:text="@string/children"
+    <ImageView
+        android:id="@+id/children_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/number_picker_children"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="10sp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/children" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/number_picker_children"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@id/children_imageView"
+        android:src="@drawable/baby" />
+
+    <ImageView
+        android:id="@+id/man_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/number_picker_children"
+        android:layout_marginTop="14dp"
+        android:layout_toStartOf="@id/children_imageView"
+        android:src="@drawable/man" />
+
+
+    <TextView
         android:id="@+id/children_textView"
-        android:textSize="25sp"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="25sp"
         android:layout_marginRight="25sp"
-        />
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:text="@string/children"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
 
     <TextView
-        android:text="@string/infants"
+        android:id="@+id/infants_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/infants_textView"
-        android:textSize="25sp"
+        android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/children_textView"
-        />
+        android:text="@string/infants"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
 
     <NumberPicker
+        android:id="@+id/number_picker_infants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_picker_infants"
         android:layout_alignEnd="@+id/infants_textView"
         android:layout_below="@id/infants_textView"
         android:layout_marginTop="7dp"
-        android:solidColor="@color/button_blue"
-        />
+        android:background="@drawable/button_bg_rounded_corners" />
 
     <NumberPicker
+        android:id="@+id/number_picker_adults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_picker_adults"
-        android:layout_below="@id/adults_textView"
         android:layout_alignStart="@+id/adults_textView"
+        android:layout_below="@id/adults_textView"
         android:layout_marginTop="7dp"
-        android:solidColor="@color/button_blue"
-        />
+        android:background="@drawable/button_bg_rounded_corners" />
 
     <Button
-        android:text="@string/ok"
+        android:id="@+id/set_passengers_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/set_passengers_button"
-        android:background="@color/button_yellow"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/number_picker_adults"
-        android:onClick="setBtn"/>
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/button_bg_rounded_corners"
+        android:onClick="setBtn"
+        android:text="@string/ok" />
 
     <Button
-        android:text="@string/cancel"
+        android:id="@+id/cancel_passenger_selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/button_yellow"
         android:layout_alignEnd="@+id/number_picker_infants"
-        android:id="@+id/cancel_passenger_selection"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/button_bg_rounded_corners"
         android:onClick="cancelBtn"
-        />
+        android:text="@string/cancel" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/number_picker_adults"
+        android:layout_alignTop="@+id/man_imageView"
+        android:src="@drawable/woman" />
 
 
 </RelativeLayout>
