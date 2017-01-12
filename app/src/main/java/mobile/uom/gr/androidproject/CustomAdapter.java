@@ -95,9 +95,9 @@ public class CustomAdapter extends BaseAdapter {
 
         // set the data into Holder
         holder.outbound_flight.setText(tempData.getOutbound_flight());
-        holder.outbound_flight_time.setText("Departs at: " + tempData.getOutbound_flight_time());
+        holder.outbound_flight_time.setText(tempData.getOutbound_flight_time());
         holder.inbound_flight.setText(tempData.getInbound_flight());
-        holder.inbound_flight_time.setText("Departs at: " + tempData.getInbound_flight_time());
+        holder.inbound_flight_time.setText(tempData.getInbound_flight_time());
         holder.flight_price.setText(tempData.getTotal_price());
 
         //TODO: add here a clickListener if I have time

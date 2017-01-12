@@ -68,6 +68,15 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
     private Toast mToast; // toast that shows errors (we need this var because we need to cancel previous Toast messages)
 
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+            /* Bellow variables are for checking if user filled all necessary search criteria */
+
+    private boolean selected_departure = false;
+    private boolean selected_destination = false;
+    private boolean selected_passengers = false;
+    private boolean selected_odates = false; // departure date
+    private boolean selected_adates = false; // return date
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +158,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
             dept_day = day;
             dept_month=month+1;
             dept_year=year;
+            // setting the checking variable into true (user selected departure date)
+            selected_odates = true;
         }
     };
 
@@ -176,6 +187,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
             ret_day = day;
             ret_month=month+1;
             ret_year=year;
+            // setting the checking variable into true (user selected return date)
+            selected_adates = true;
         }
     };
 
@@ -195,7 +208,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
     public void showFlights(View view) {
         Context content = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
+        int duration = Toast.LENGTH_LONG;
 
         //toast = Toast.makeText(content, "", duration);
         Calendar c = Calendar.getInstance();
@@ -208,8 +221,31 @@ public class SearchFlightsActivity extends AppCompatActivity {
             mToast.cancel();
         }
 
-        //TODO: check if user has filled all data before clicking "Search flights"
-        /* must have: origin and destinations airports, passengers, departure and arrival dates */
+        // checking if user filled all data before click
+        boolean problem = false;
+
+        if(!selected_departure) {
+            mToast = Toast.makeText(content, "You must first select starting airport", duration);
+            problem = true;
+        } else if(!selected_destination) {
+            mToast = Toast.makeText(content, "You must select destination airport", duration);
+            problem = true;
+        } else if(!selected_passengers) {
+            mToast = Toast.makeText(content, "No passenger is selected", duration);
+            problem = true;
+        } else if(!selected_odates) {
+            mToast = Toast.makeText(content, "Select departure day", duration);
+            problem = true;
+        } else if(!selected_adates) {
+            mToast = Toast.makeText(content, "Select when you return", duration);
+            problem = true;
+        }
+        // if there is a problem in data input stop here
+        if(problem) {
+            mToast.show();
+            return;
+        }
+
 
         //trying to find out if returning day is prior departure which is wrong or if user selected dates
         while (dept_year > ret_year || dept_month > ret_month || dept_day > ret_day || departure_date.equals("") || return_date.equals("")) {
@@ -297,6 +333,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
                         adults_tv.setText(data.getStringExtra("ADULTS"));
                         children_tv.setText(data.getStringExtra("CHILDREN"));
                         infants_tv.setText(data.getStringExtra("INFANTS"));
+                        // setting the checking variable into true (user selected passengers)
+                        selected_passengers = true;
                         break;
                     case "SPINNER_CANCEL":
                         // setting the data at the correct TextViews
@@ -309,12 +347,16 @@ public class SearchFlightsActivity extends AppCompatActivity {
                         location_tv.setText(data.getStringExtra("AIRPORT"));
                         // keeping the code for further use
                         origin_airport = data.getStringExtra("CODE");
+                        // setting the checking variable into true (user selected departure airport)
+                        selected_departure = true;
                         break;
                     case "DESTINATION_AIRPORT":
                         // setting the data at the correct TextView
                         destination_tv.setText(data.getStringExtra("AIRPORT"));
                         // keeping the code for further use
                         destination_airport = data.getStringExtra("CODE");
+                        // setting the checking variable into true (user selected destination airport)
+                        selected_destination = true;
                         break;
                 }
             }
