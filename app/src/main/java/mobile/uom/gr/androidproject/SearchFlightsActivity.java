@@ -220,8 +220,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
         // first we need to take the seat selection
         seat_type = String.valueOf(seat_types.getSelectedItem()).toUpperCase();
         seat_type = seat_type.replaceAll("\\s+", "_"); // we don't need whitespaces
-        if (seat_type == "ECONOMY" || seat_type == "PREMIUM_ECONOMY") {
-        } else {
+        if(seat_type.equals("BUSINESS_CLASS") || seat_type.equals("FIRST_CLASS")) {
             String[] words = seat_type.split("_");
             seat_type = words[0];
         }
