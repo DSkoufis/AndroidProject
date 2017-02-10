@@ -58,7 +58,7 @@ public class FlightsActivity extends Activity {
         infants = intent.getStringExtra("INFANTS");
         departure_date = intent.getStringExtra("DEPARTURE_DATE");
         returning_date = intent.getStringExtra("RETURN_DATE");
-        seat_type = intent.getStringExtra("SEAT_TYPE").toUpperCase();
+        seat_type = intent.getStringExtra("SEAT_TYPE");
         isDirect = intent.getStringExtra("IS_DIRECT");
 
         // calling the Amadeus
@@ -190,7 +190,7 @@ public class FlightsActivity extends Activity {
         final String OUTBOUND = "outbound"; // it holds the outbound flight
         final String INBOUND = "inbound"; // it holds the inbound flight
         final String FLIGHTS = "flights"; // (ARRAY) it holds the objects of flights of the trip
-        final String DEPART = "departs_at"; // it holds the time of departure in ISO 8601 format
+        final String DEPART = "departs_at"; // it holds the time of flight take-off in ISO 8601 format
         final String ORIGIN = "origin"; // it holds the origin airport
         final String DESTINATION = "destination"; // it holds the destination airport
 
@@ -229,7 +229,7 @@ public class FlightsActivity extends Activity {
                 for (int x = 0; x < out_flightsArray.length(); x++) { // getting all flights one by one
                     JSONObject an_out_flightJson = out_flightsArray.getJSONObject(x);
                     if (x == 0) { // only for the first flight
-                        an_outbound_flight_time = an_out_flightJson.getString(DEPART);
+                        an_outbound_flight_time = prettierTime(an_out_flightJson.getString(DEPART));
                         an_outbound_flight = an_out_flightJson.getJSONObject(ORIGIN).getString("airport") +
                                 "-" + an_out_flightJson.getJSONObject(DESTINATION).getString("airport");
                     } else {
@@ -243,15 +243,13 @@ public class FlightsActivity extends Activity {
                 for (int x = 0; x < in_flightsArray.length(); x++) {
                     JSONObject an_in_flightJson = in_flightsArray.getJSONObject(x);
                     if (x == 0) { // only for the first loop
-                        an_inbound_flight_time = an_in_flightJson.getString(DEPART);
+                        an_inbound_flight_time = prettierTime(an_in_flightJson.getString(DEPART));
                         an_inbound_flight = an_in_flightJson.getJSONObject(ORIGIN).getString("airport") +
                                 "-" + an_in_flightJson.getJSONObject(DESTINATION).getString("airport");
                     } else {
                         an_inbound_flight += "-" + an_in_flightJson.getJSONObject(DESTINATION).getString("airport");
                     }
                 }
-
-                //TODO: give better appearance at displayed time (now its yy-MM-ddThh-mm ISO 8601 format)
 
                 FlightModel aFlight = new FlightModel(an_outbound_flight, an_outbound_flight_time,
                         an_inbound_flight, an_inbound_flight_time, a_price);
@@ -268,5 +266,23 @@ public class FlightsActivity extends Activity {
         //TODO: from here we can display a Fragment if user clicks on an item, and show details of the flight
         // like: operating airlines, better details in middle stops, price per person etc...
         // but I believe that's for another semester
+    }
+
+    public String prettierTime(String takeoff) {
+        // this method to show prettier the times of take-offs and not in ugly ISO 8601 format
+
+        // first split the whole string from date and time
+        String[] words = takeoff.split("T");
+        String date = words[0];
+        String time = words[1];
+
+        // then show date in readable format
+        String[] dates = date.split("-");
+        String day = dates[2];
+        String month = dates[1];
+        String year = dates[0];
+        date = day + "-" + month + "-" + year;
+
+        return date + "\n" + time;
     }
 }

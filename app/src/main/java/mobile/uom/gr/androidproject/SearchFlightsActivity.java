@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -25,8 +26,12 @@ import java.util.Calendar;
 
 public class SearchFlightsActivity extends AppCompatActivity {
 
+    /* We need a spinner to take the user selection of seat type */
+
+    private Spinner seat_types;
+
     /*-----------------------------------------------------------------------------------------------------------------------*/
-    /* Bellow variables are the TextViews that show the data before user decide to search for flights */
+        /* Bellow variables are the TextViews that show the data before user decide to search for flights */
 
     private TextView location_tv; //textView that shows the city that user selected in OriginActivity.java
     private TextView destination_tv; //textView that shows the city that user selected in DestinationActivity.java
@@ -83,9 +88,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_flights);
         this.setTitle("Select your search criteria");
 
-        //Give the selected value of spinner on seat_type string
-        Spinner seat_types = (Spinner) findViewById(R.id.seats_spinner);
-        seat_type = String.valueOf(seat_types.getSelectedItem());
+        //init the spinner
+        seat_types = (Spinner) findViewById(R.id.seats_spinner);
 
         //Init
         location_tv = (TextView) findViewById(R.id.origin_text);
@@ -124,6 +128,10 @@ public class SearchFlightsActivity extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
+
+        // TODO: set the dialog to disable past dates
+        // TODO: departure and return DateListeners are a shame
+
         if (id == 999) { //999 code for departure btn
             return new DatePickerDialog(this, departureDateListener, year, month, day);
         }
@@ -207,6 +215,12 @@ public class SearchFlightsActivity extends AppCompatActivity {
     }
 
     public void showFlights(View view) {
+        // this method when search flights button is pressed
+
+        // first we need to take the seat selection
+        seat_type = String.valueOf(seat_types.getSelectedItem()).toUpperCase();
+        seat_type = seat_type.replaceAll("\\s+", "_"); // we don't need whitespaces
+
         Context content = getApplicationContext();
         int duration = Toast.LENGTH_LONG;
 
@@ -362,4 +376,5 @@ public class SearchFlightsActivity extends AppCompatActivity {
             }
         }
     }
+
 }
