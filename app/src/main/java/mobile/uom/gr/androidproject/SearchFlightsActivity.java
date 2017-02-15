@@ -219,10 +219,11 @@ public class SearchFlightsActivity extends AppCompatActivity {
 
         // first we need to take the seat selection
         seat_type = String.valueOf(seat_types.getSelectedItem()).toUpperCase();
-        seat_type = seat_type.replaceAll("\\s+", "_"); // we don't need whitespaces
+        seat_type = seat_type.replaceAll("\\s+", "_"); // we don't need whitespaces so we replace it by _
         if(seat_type.equals("BUSINESS_CLASS") || seat_type.equals("FIRST_CLASS")) {
-            String[] words = seat_type.split("_");
-            seat_type = words[0];
+            // AMADEUS understands only BUSINESS and FIRST for these two seat types
+            String[] words = seat_type.split("_"); // so we split the word into two tokens
+            seat_type = words[0]; // but the token we need is the first element
         }
 
         Context content = getApplicationContext();
